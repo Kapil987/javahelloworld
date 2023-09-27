@@ -17,9 +17,19 @@ pipelineJob("${projectName}-Pipeline") {
                     }
 
                     stages {
-                        stage('Hello Stage') {
+                        stage('build') {
                             steps {
-                                echo 'i have been automated from git'
+                                echo 'This is a build stage'
+                            }
+                        }
+                        stage('test') {
+                            steps {
+                                echo 'This is a test stage'
+                            }
+                        }
+                        stage('deploy') {
+                            steps {
+                                echo 'This is a deploy stage'
                             }
                         }
                     }
