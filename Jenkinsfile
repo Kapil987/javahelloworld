@@ -1,6 +1,6 @@
 pipeline {
     agent {
-         label "${params.AGENT_NAME}"  // Reference the AGENT_NAME parameter
+         label "algoworks-dev-server"  // Reference the AGENT_NAME parameter
     }
     
     stages {
