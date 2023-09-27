@@ -16,7 +16,6 @@ pipelineJob("${projectName}-Pipeline") {
                 git("https://github.com/Kapil987/javahelloworld.git", 'main')  // Adjust as necessary
             }
         scriptPath('Jenkinsfile') 
-            sandbox()
         }
     }
 }
