@@ -32,7 +32,7 @@ pipelineJob("${projectName}-Pipeline") {
                         stage('Deploy') {
                             steps {
                                 echo 'This is a deploy stage'
-                                sleep 3
+                                sleep 4
                             }
                         }
                     }
