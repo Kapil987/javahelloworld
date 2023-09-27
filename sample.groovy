@@ -17,19 +17,19 @@ pipelineJob("${projectName}-Pipeline") {
                     }
 
                     stages {
-                        stage('build') {
+                        stage('Build') {
                             steps {
                                 echo 'This is a build stage'
                                 sleep 2
                             }
                         }
-                        stage('test') {
+                        stage('Test') {
                             steps {
                                 echo 'This is a test stage'
                                 sleep 3
                             }
                         }
-                        stage('deploy') {
+                        stage('Deploy') {
                             steps {
                                 echo 'This is a deploy stage'
                                 sleep 3
