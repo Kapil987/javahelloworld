@@ -25,7 +25,7 @@ pipelineJob("${projectName}-Pipeline") {
                     }
                 }
             """)
-            sandbox()
+            sandbox(false)
         }
     }
 }
