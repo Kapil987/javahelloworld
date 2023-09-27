@@ -20,7 +20,11 @@ pipelineJob("${projectName}-Pipeline") {
                         stage('Build') {
                             steps {
                                 withCredentials([aws(credentialsId: 'pm2-stage-aws-creds', accessKeyVariable: 'AWS_ACCESS_KEY', secretKeyVariable: 'AWS_SECRET_KEY')]) {
-                                 aws s3 ls 
+                                 sh '''#!/bin/bash
+                                 export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY
+                                 export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_KEY
+                                 aws s3 ls
+                                '''
                                  }
                                
                                 echo 'This is a build stages'
