@@ -1,9 +1,6 @@
-def projectName = 'TestProject2' // mock value for testing
-def agentName = 'algoworks-dev-server' // mock value for testing
-
 pipeline {
     agent {
-        label '${agentName}'
+         label "${params.AGENT_NAME}"  // Reference the AGENT_NAME parameter
     }
     
     stages {
