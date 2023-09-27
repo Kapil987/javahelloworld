@@ -19,8 +19,10 @@ pipelineJob("${projectName}-Pipeline") {
                     stages {
                         stage('Build') {
                             steps {
-                                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY', credentialsId: 'pm2-stage-aws-creds', secretKeyVariable: 'AWS_SECRET_KEY']])
-                                aws s3 ls
+                                withCredentials([aws(credentialsId: 'pm2-stage-aws-creds', accessKeyVariable: 'AWS_ACCESS_KEY', secretKeyVariable: 'AWS_SECRET_KEY')]) {
+                                 aws s3 ls 
+                                 }
+                               
                                 echo 'This is a build stages'
                                 sleep 2
                             }
