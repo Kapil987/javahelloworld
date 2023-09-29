@@ -18,7 +18,7 @@ pipeline {
                 // Access the file parameter using params.dist
                 echo "Uploaded file path: ${params.dist}"
 
-                withCredentials([aws(credentialsId: 'pm2-stage-aws-creds', accessKeyVariable: 'AWS_ACCESS_KEY', secretKeyVariable: 'AWS_SECRET_KEY')]) {
+                withCredentials([aws(credentialsId: AWS_CREDENTIALS_ID, accessKeyVariable: 'AWS_ACCESS_KEY', secretKeyVariable: 'AWS_SECRET_KEY')]) {
                     sh '''
                     #!/bin/bash
                     set -x
