@@ -49,11 +49,20 @@ for (int i = 0; i < projects.size(); i++) {
                 }
             }
         } else {
+        pipelineJob("${projectName}-Pipeline") {
+            description("Pipeline job for ${projectName}")
+            
+            logRotator {
+                numToKeep(daysToKeep)
+            }
+            
             definition {
-                cpsScm {
+                cps {
+                    // The path to a Jenkinsfile that has minimal logic for cases where there's no SCM
                     scriptPath('Jenkinsfile-s3-cloudfront')
                 }
             }
         }
+    }
     }
 }
