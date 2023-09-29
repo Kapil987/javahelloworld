@@ -32,7 +32,7 @@ for (int i = 0; i < projects.size(); i++) {
         description("Freestyle job for ${projectName}")
         
       // Set the agent for the job
-        assignedNode(AGENT_LABEL)
+        node(AGENT_LABEL)
         
         logRotator {
             numToKeep(daysToKeep)
