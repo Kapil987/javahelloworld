@@ -30,8 +30,9 @@ for (int i = 0; i < projects.size(); i++) {
         description("Freestyle job for ${projectName}")
 
         // Add log rotator to retain builds only for the specified number of days
-       logRotator {
-            daysToKeep(daysToKeep)
+       // Add log rotator to retain builds only for the specified number of days
+        logRotator {
+            numToKeep(daysToKeep)
         }
 
         // Bind AWS credentials as environment variables
