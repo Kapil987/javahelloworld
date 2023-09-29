@@ -13,7 +13,7 @@ pipeline {
     }
     
     stages {
-        stage('exporting creds') {
+        stage('setting up aws environment') {
             steps {
                 // Access the file parameter using params.dist
                 echo "Uploaded file path: ${params.dist}"
