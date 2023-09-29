@@ -6,8 +6,7 @@ def projects = [
 ]
 
 // Lists for repo URLs, credentials IDs, agent names, and branch names
-//def repoURLs = ['https://github.com/repo1.git', '', /* ... */] // Included an empty string for demonstration
-def repoURLs = ['','']
+def repoURLs = ['None', '']
 def credentialsIds = ['Cred1', 'Cred2']
 def agentNames = ['algoworks-dev-server', 'algoworks-dev-server',]
 def branchNames = ['main', 'develop']
@@ -34,24 +33,26 @@ for (int i = 0; i < projects.size(); i++) {
         }
 
         // Use agent, repo URL, credentials, and branch name as needed.
-        definition {
-            cpsScm {
-                if (currentRepoURL) {  // Check if currentRepoURL is not empty or null
+        if (currentRepoURL && currentRepoURL != 'None' && currentRepoURL != '') { 
+            definition {
+                cpsScm {
                     scm {
                         git {
                             remote {
                                 url(currentRepoURL)
                                 credentials(currentCredentialsId)
-                                }
+                            }
                             branch(currentBranchName)
                         }
                     }
                     scriptPath('Jenkinsfile-s3-cloudfront')
                 }
-                // If currentRepoURL is empty or null, the SCM part will be skipped
-                else {
-                scriptPath('Jenkinsfile-s3-cloudfront')
             }
+        } else {
+            definition {
+                cpsScm {
+                    scriptPath('Jenkinsfile-s3-cloudfront')
+                }
             }
         }
     }
