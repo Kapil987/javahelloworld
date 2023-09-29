@@ -1,23 +1,49 @@
-//def projectName = params['PROJECT_NAME'].trim()
-//def agentName = params['AGENT_NAME'].trim()
-def projectName = 'TestProject2' // mock value for testing
-def agentName = 'algoworks-dev-server' // mock value for testing
-def gitRepoURL = 'YOUR_GIT_REPO_URL'
-def gitCredentialsId = 'YOUR_CREDENTIALS_ID'  // Replace with your actual Git credentials ID
+// List of project details
+def projects = [
+    [name: 'TestProject1', environment: 'Dev', team: 'TeamA', job: 'Build'],
+    [name: 'TestProject2', environment: 'Prod', team: 'TeamB', job: 'Deploy'],
+    // ... add more projects as needed
+]
 
+// Lists for repo URLs, credentials IDs, agent names, and branch names
+//def repoURLs = ['https://github.com/repo1.git', '', /* ... */] // Included an empty string for demonstration
+def repoURLs = ['','']
+def credentialsIds = ['Cred1', 'Cred2']
+def agentNames = ['algoworks-dev-server', 'algoworks-dev-server',]
+def branchNames = ['main', 'develop']
 
-pipelineJob("${projectName}-Pipeline") {
-    description("Pipeline job for ${projectName}")
-    //parameters {
-    //    stringParam('AGENT_NAME', agentName, 'The name of the agent to run the build on')
-    //}
+// Variable to determine the number of days to retain builds
+def daysToKeep = 7
+
+// Loop over projects
+for (int i = 0; i < projects.size(); i++) {
+    def project = projects[i]
+    def projectName = "${project.name}-${project.environment}-${project.team}-${project.job}"
     
-    definition {
-        cpsScm {
-            scm {
-                git("https://github.com/Kapil987/javahelloworld.git", 'main')  // Adjust as necessary
+    def currentRepoURL = repoURLs[i]
+    def currentCredentialsId = credentialsIds[i]
+    def currentAgentName = agentNames[i]
+    def currentBranchName = branchNames[i]
+
+    pipelineJob("${projectName}-Pipeline") {
+        description("Pipeline job for ${projectName}")
+        
+        // Add log rotator to retain builds only for the specified number of days
+        logRotator {
+            daysToKeep(daysToKeep)  // Only retain builds for the specified number of days
+        }
+        
+        // Use agent, repo URL, credentials, and branch name as needed.
+        definition {
+            cpsScm {
+                if (currentRepoURL) {  // Check if currentRepoURL is not empty or null
+                    scm {
+                        git(currentRepoURL, currentBranchName, currentCredentialsId)
+                    }
+                    scriptPath('Jenkinsfile-s3-cloudfront')
+                }
+                // If currentRepoURL is empty or null, the SCM part will be skipped
             }
-        scriptPath('Jenkinsfile') 
         }
     }
 }
