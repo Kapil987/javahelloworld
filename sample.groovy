@@ -6,10 +6,11 @@ def projects = [
 ]
 
 // Lists for repo URLs, credentials IDs, agent names, and branch names
-//def repoURLs = ['None', '']
-//def credentialsIds = ['Cred1', 'Cred2']
+//def repoURLs = ['https://github.com/repo1.git', '', /* ... */] // Included an empty string for demonstration
+def repoURLs = ['https://github.com/Kapil987/javahelloworld.git','https://github.com/Kapil987/javahelloworld.git']
+def credentialsIds = ['Cred1', 'Cred2']
 def agentNames = ['algoworks-dev-server', 'algoworks-dev-server',]
-//def branchNames = ['main', 'develop']
+def branchNames = ['main', 'develop']
 
 // Variable to determine the number of days to retain builds
 def daysToKeep = 7
@@ -19,6 +20,11 @@ for (int i = 0; i < projects.size(); i++) {
     def project = projects[i]
     def projectName = "${project.name}-${project.environment}-${project.team}-${project.job}"
     
+    def currentRepoURL = repoURLs[i]
+    def currentCredentialsId = credentialsIds[i]
+    def currentAgentName = agentNames[i]
+    def currentBranchName = branchNames[i]
+
     pipelineJob("${projectName}-Pipeline") {
         description("Pipeline job for ${projectName}")
         
@@ -27,10 +33,19 @@ for (int i = 0; i < projects.size(); i++) {
             numToKeep(daysToKeep)
         }
 
-        // Set the script path
+        // Use agent, repo URL, credentials, and branch name as needed.
         definition {
-            cps {
-                script(readFileFromWorkspace('Jenkinsfile-s3-cloudfront'))
+            cpsScm {
+                    scm {
+                        git {
+                            remote {
+                                url(currentRepoURL)
+                                credentials(currentCredentialsId)
+                                }
+                            branch(currentBranchName)
+                        }
+                    }
+                    scriptPath('Jenkinsfile-s3-cloudfront')
             }
         }
     }
