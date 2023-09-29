@@ -49,9 +49,9 @@ for (int i = 0; i < projects.size(); i++) {
                 }
             }
         } else {
-                cpsScm {
+                cps {
                     // No scm block here, as there's no SCM for this job
-                    scriptPath('Jenkinsfile-s3-cloudfront') // For cases without SCM
+                   script(readFileFromWorkspace('Jenkinsfile-s3-cloudfront'))
                 }
             }
     }
