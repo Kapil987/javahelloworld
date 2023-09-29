@@ -30,7 +30,7 @@ for (int i = 0; i < projects.size(); i++) {
         // Set the script path
         definition {
             cps {
-                scriptPath('Jenkinsfile-s3-cloudfront')
+                script('Jenkinsfile-s3-cloudfront')
             }
         }
     }
