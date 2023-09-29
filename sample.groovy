@@ -10,7 +10,7 @@ def projects = [
 def repoURLs = ['https://github.com/Kapil987/javahelloworld.git','https://github.com/Kapil987/javahelloworld.git']
 def credentialsIds = ['Cred1', 'Cred2']
 def agentNames = ['algoworks-dev-server', 'algoworks-dev-server',]
-def branchNames = ['main', 'develop']
+def branchNames = ['main', 'main']
 
 // Variable to determine the number of days to retain builds
 def daysToKeep = 7
