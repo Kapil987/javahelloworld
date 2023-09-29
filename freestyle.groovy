@@ -1,3 +1,5 @@
+def AGENT_LABEL = "algoworks-dev-server"
+
 // List of project details
 def projects = [
     [name: 'TestProject1', environment: 'Dev', team: 'TeamA', job: 'Build'],
@@ -28,9 +30,10 @@ for (int i = 0; i < projects.size(); i++) {
 
     freeStyleJob("${projectName}-FreeStyle") {
         description("Freestyle job for ${projectName}")
-
-        // Add log rotator to retain builds only for the specified number of days
-       // Add log rotator to retain builds only for the specified number of days
+        
+      // Set the agent for the job
+        assignedNode(AGENT_LABEL)
+        
         logRotator {
             numToKeep(daysToKeep)
         }
