@@ -1,0 +1,70 @@
+def AGENT_LABEL = "algoworks-dev-server"
+def AWS_CREDENTIALS_ID = "pm2-stage-aws-creds"
+def BUCKET_NAME = "your-s3-bucket-name" // replace with your bucket name
+def CLOUDFRONT_DIST_ID = "your-cloudfront-distribution-id" // replace with your CloudFront distribution ID
+
+pipeline {
+    agent {
+         label AGENT_LABEL
+    }
+    
+    parameters {
+        file(name: 'dist', description: 'Upload dist.zip')
+    }
+    
+    stages {
+        stage('exporting creds') {
+            steps {
+                // Access the file parameter using params.dist
+                echo "Uploaded file path: ${params.dist}"
+
+                withCredentials([aws(credentialsId: AWS_CREDENTIALS_ID, accessKeyVariable: 'AWS_ACCESS_KEY', secretKeyVariable: 'AWS_SECRET_KEY')]) {
+                    sh """
+                    #!/bin/bash
+                    set -x
+                    export AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+                    export AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+
+                    """
+                }
+            }
+        }
+        stage('unzipping file') {
+            steps {
+			sh """
+			        mv dist ${params.dist}
+
+                    unzip ${params.dist}
+                    sleep 10
+			"""
+            }
+        }
+        stage('uploading it to s3') {
+            steps {
+         		sh """
+				if [ -d "${WORKSPACE}/dist" ]
+                    then
+                        cd ${WORKSPACE}/dist/
+                        aws s3 cp . s3://${BUCKET_NAME} --recursive --acl public-read
+                        aws cloudfront create-invalidation --distribution-id ${CLOUDFRONT_DIST_ID} --paths "/*"
+                        rm -rf ${WORKSPACE}/*
+                    else
+                        exit 1
+                    fi
+                """
+            }
+        }
+		
+		stage('create-invalidation') {
+            steps {
+                sh """
+                        aws s3 cp . s3://${BUCKET_NAME} --recursive --acl public-read
+                        aws cloudfront create-invalidation --distribution-id ${CLOUDFRONT_DIST_ID} --paths "/*"
+                        rm -rf ${WORKSPACE}/*
+                    }
+                """
+        
+                }
+        }
+    }
+}
