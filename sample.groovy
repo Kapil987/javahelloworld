@@ -29,8 +29,9 @@ for (int i = 0; i < projects.size(); i++) {
         description("Pipeline job for ${projectName}")
         
         // Add log rotator to retain builds only for the specified number of days
+        // Adjusted log rotator to retain builds only for the specified number of days
         logRotator {
-            daysToKeep(daysToKeep)  // Only retain builds for the specified number of days
+            numToKeepStr(daysToKeep.toString())  
         }
         
         // Use agent, repo URL, credentials, and branch name as needed.
