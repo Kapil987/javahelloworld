@@ -38,7 +38,13 @@ for (int i = 0; i < projects.size(); i++) {
             cpsScm {
                 if (currentRepoURL) {  // Check if currentRepoURL is not empty or null
                     scm {
-                        git(currentRepoURL, currentBranchName, currentCredentialsId)
+                        git {
+                            remote {
+                                url(currentRepoURL)
+                                credentials(currentCredentialsId)
+                                }
+                            branch(currentBranchName)
+                        }
                     }
                     scriptPath('Jenkinsfile-s3-cloudfront')
                 }
