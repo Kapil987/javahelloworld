@@ -49,6 +49,9 @@ for (int i = 0; i < projects.size(); i++) {
                     scriptPath('Jenkinsfile-s3-cloudfront')
                 }
                 // If currentRepoURL is empty or null, the SCM part will be skipped
+                else {
+                scriptPath('Jenkinsfile-s3-cloudfront')
+            }
             }
         }
     }
