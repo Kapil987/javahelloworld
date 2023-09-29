@@ -7,7 +7,7 @@ def projects = [
 
 // Lists for repo URLs, credentials IDs, agent names, and branch names
 //def repoURLs = ['https://github.com/repo1.git', '', /* ... */] // Included an empty string for demonstration
-def repoURLs = ['','']
+def repoURLs = ['https://github.com/repo1.git','https://github.com/repo1.git']
 def credentialsIds = ['Cred1', 'Cred2']
 def agentNames = ['algoworks-dev-server', 'algoworks-dev-server',]
 def branchNames = ['main', 'develop']
