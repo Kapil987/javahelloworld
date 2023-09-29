@@ -29,11 +29,10 @@ for (int i = 0; i < projects.size(); i++) {
         description("Pipeline job for ${projectName}")
         
         // Add log rotator to retain builds only for the specified number of days
-        // Adjusted log rotator to retain builds only for the specified number of days
         logRotator {
-            numToKeepStr(daysToKeep.toString())  
+            numToKeep(daysToKeep)
         }
-        
+
         // Use agent, repo URL, credentials, and branch name as needed.
         definition {
             cpsScm {
