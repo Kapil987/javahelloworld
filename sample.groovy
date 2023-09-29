@@ -49,20 +49,10 @@ for (int i = 0; i < projects.size(); i++) {
                 }
             }
         } else {
-        pipelineJob("${projectName}-Pipeline") {
-            description("Pipeline job for ${projectName}")
-            
-            logRotator {
-                numToKeep(daysToKeep)
-            }
-            
-            definition {
-                cps {
-                    // The path to a Jenkinsfile that has minimal logic for cases where there's no SCM
-                    scriptPath('Jenkinsfile-s3-cloudfront')
+                cpsScm {
+                    // No scm block here, as there's no SCM for this job
+                    scriptPath('Jenkinsfile-s3-cloudfront') // For cases without SCM
                 }
             }
-        }
-    }
     }
 }
