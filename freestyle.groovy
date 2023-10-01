@@ -35,14 +35,15 @@ export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
 #aws s3 ls
 
 echo "########### Unzipping Zip File ###########"
-mv build ${dist}
-unzip ${dist}
+ls -l
+mv build ${build}
+unzip ${build}
 sleep 5
 
 echo "########### Uploading files to s3 ###########"
 if [ -d "${WORKSPACE}/build" ]
 then
-    cd ${WORKSPACE}/dist/
+    cd ${WORKSPACE}/build/build/
     aws s3 cp . s3://${BUCKET_NAME}
     aws cloudfront create-invalidation --distribution-id ${CLOUDFRONT_DIST_ID} --paths "/*"
     rm -rf ${WORKSPACE}/*
