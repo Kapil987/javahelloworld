@@ -3,8 +3,8 @@ def AGENT_LABEL = "algoworks-dev-server"
 
 // List of project details
 def projects = [
-    [name: 'TestProject1', environment: 'Dev', team: 'TeamA', job: 'Build'],
-    //[name: 'TestProject2', environment: 'Prod', team: 'TeamB', job: 'Deploy'],
+    [name: 'ProjectName1', environment: 'Dev', team: 'TeamA', job: 'JobName'],
+    //[name: 'ProjectName2', environment: 'Prod', team: 'TeamB', job: 'JobName'],
     // ... add more projects as needed
 ]
 
