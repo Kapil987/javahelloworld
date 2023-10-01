@@ -9,7 +9,7 @@ pipeline {
     }
     
     parameters {
-        file(name: 'dist', description: 'Upload dist.zip')
+        file(name: 'build', description: 'Upload dist.zip')
     }
     
     stages {
