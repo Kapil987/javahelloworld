@@ -44,7 +44,7 @@ echo "########### Uploading files to s3 ###########"
 if [ -d "${WORKSPACE}/build" ]
 then
     cd ${WORKSPACE}/build/build/
-    aws s3 cp . s3://${BUCKET_NAME}
+    aws s3 cp . s3://${BUCKET_NAME} --recursive
     aws cloudfront create-invalidation --distribution-id ${CLOUDFRONT_DIST_ID} --paths "/*"
     rm -rf ${WORKSPACE}/*
 else
