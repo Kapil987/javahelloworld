@@ -1,5 +1,5 @@
 def AGENT_LABEL = "algoworks-dev-server"
-def AWS_CREDENTIALS_ID = "pm2-stage-aws-creds"
+def AWS_CREDENTIALS_ID = "awsAlgoTestCreds"
 def BUCKET_NAME = "your-s3-bucket-name" // replace with your bucket name
 def CLOUDFRONT_DIST_ID = "your-cloudfront-distribution-id" // replace with your CloudFront distribution ID
 
