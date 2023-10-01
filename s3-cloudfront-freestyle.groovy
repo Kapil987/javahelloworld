@@ -1,5 +1,4 @@
 // Variables that may need modification
-
 def AGENT_LABEL = "algoworks-dev-server"
 
 // List of project details
