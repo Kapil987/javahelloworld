@@ -20,8 +20,8 @@ def shellScript = '''
 set -e
 
 # Shell variables to be set
-CLOUDFRONT_DIST_ID=""
-BUCKET_NAME=""
+CLOUDFRONT_DIST_ID="E2SXBN6GO26E1G"
+BUCKET_NAME="devops-test2-bucket-algo"
 
 # Check if the variables are set and not empty
 if [ -z "$CLOUDFRONT_DIST_ID" ] || [ -z "$BUCKET_NAME" ]; then
