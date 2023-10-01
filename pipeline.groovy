@@ -1,13 +1,14 @@
 // List of project details
 def projects = [
     [name: 'TestProject1', environment: 'Dev', team: 'TeamA', job: 'Build'],
-    [name: 'TestProject2', environment: 'Prod', team: 'TeamB', job: 'Deploy'],
+    //[name: 'TestProject2', environment: 'Prod', team: 'TeamB', job: 'Deploy'],
     // ... add more projects as needed
 ]
 
 // Lists for repo URLs, credentials IDs, agent names, and branch names
 //def repoURLs = ['https://github.com/repo1.git', '', /* ... */] // Included an empty string for demonstration
 def repoURLs = ['https://github.com/Kapil987/javahelloworld.git','https://github.com/Kapil987/javahelloworld.git']
+//def repoURLs = ['https://github.com/Kapil987/javahelloworld.git']
 def credentialsIds = ['Cred1', 'Cred2']
 def agentNames = ['algoworks-dev-server', 'algoworks-dev-server',]
 def branchNames = ['main', 'main']
