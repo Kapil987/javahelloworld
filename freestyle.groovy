@@ -83,7 +83,7 @@ for (int i = 0; i < projects.size(); i++) {
         }
         // Add file parameter to accept build.zip
         parameters {
-            fileParam('dist', 'Provide the build.zip file')
+            fileParam('build', 'Provide the build.zip file')
         }
 
         // Add shell script build step
