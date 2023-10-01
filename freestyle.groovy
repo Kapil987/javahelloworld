@@ -78,6 +78,7 @@ for (int i = 0; i < projects.size(); i++) {
                     credentialsId(currentCredentialsId)
                 }
             }
+            preBuildCleanup()
         }
         // Add file parameter to accept build.zip
         parameters {
