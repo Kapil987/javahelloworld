@@ -1,5 +1,19 @@
 // Variables that may need modification
-def AGENT_LABEL = "algoworks-dev-server"
+//def AGENT_LABEL = "algoworks-dev-server"
+
+// Define parameters to accept the AGENT_LABEL and credentialsIds
+parameters {
+    stringParam('AGENT_LABEL_PARAM', 'algoworks-dev-server', 'Label for the Jenkins agent')
+    stringParam('CREDENTIALS_ID_PARAM', '', 'ID for AWS credentials') // No default value provided
+}
+
+// Use provided parameters or default values
+def AGENT_LABEL = AGENT_LABEL_PARAM ?: "algoworks-dev-server"
+def defaultCredentialsId = CREDENTIALS_ID_PARAM
+
+if (!defaultCredentialsId) {
+    throw new IllegalArgumentException("CREDENTIALS_ID_PARAM is required.")
+}
 
 // List of project details
 def projects = [
@@ -8,7 +22,8 @@ def projects = [
     // ... add more projects as needed
 ]
 
-def credentialsIds = ['awsAlgoTestCreds', 'awsAlgoTestCreds']
+// Use the defaultCredentialsId for all projects
+def credentialsIds = projects.collect { defaultCredentialsId }
 
 // Variable to determine the number of days to retain builds
 def daysToKeep = 7
@@ -20,8 +35,8 @@ def shellScript = '''
 set -e
 
 # Shell variables to be set
-CLOUDFRONT_DIST_ID="E2SXBN6GO26E1G"
-BUCKET_NAME="devops-test2-bucket-algo"
+CLOUDFRONT_DIST_ID=""
+BUCKET_NAME=""
 
 # Check if the variables are set and not empty
 if [ -z "$CLOUDFRONT_DIST_ID" ] || [ -z "$BUCKET_NAME" ]; then
