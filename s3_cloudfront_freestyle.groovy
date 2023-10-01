@@ -1,19 +1,5 @@
 // Variables that may need modification
-//def AGENT_LABEL = "algoworks-dev-server"
-
-// Define parameters to accept the AGENT_LABEL and credentialsIds
-parameters {
-    stringParam('AGENT_LABEL_PARAM', 'algoworks-dev-server', 'Label for the Jenkins agent')
-    stringParam('CREDENTIALS_ID_PARAM', '', 'ID for AWS credentials') // No default value provided
-}
-
-// Use provided parameters or default values
-def AGENT_LABEL = AGENT_LABEL_PARAM ?: "algoworks-dev-server"
-def defaultCredentialsId = CREDENTIALS_ID_PARAM
-
-if (!defaultCredentialsId) {
-    throw new IllegalArgumentException("CREDENTIALS_ID_PARAM is required.")
-}
+def AGENT_LABEL = "algoworks-dev-server"
 
 // List of project details
 def projects = [
@@ -22,8 +8,7 @@ def projects = [
     // ... add more projects as needed
 ]
 
-// Use the defaultCredentialsId for all projects
-def credentialsIds = projects.collect { defaultCredentialsId }
+def credentialsIds = ['awsAlgoTestCreds', 'awsAlgoTestCreds']
 
 // Variable to determine the number of days to retain builds
 def daysToKeep = 7
