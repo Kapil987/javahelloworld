@@ -12,7 +12,7 @@ def credentialsIds = ['awsAlgoTestCreds', 'awsAlgoTestCreds']
 
 // Variable to determine the number of days to retain builds
 def daysToKeep = 7
-println "Printing from Shell: ${temp}"
+//if freestly has to accept parameters println "Printing from Shell: ${temp}"
 
 // Shell script to be executed in the freestyle job
 def shellScript = '''
