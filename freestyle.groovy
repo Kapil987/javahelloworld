@@ -29,17 +29,17 @@ if [ -z "$CLOUDFRONT_DIST_ID" ] || [ -z "$BUCKET_NAME" ]; then
     exit 1
 fi
 
-echo "########### exporting creds ###########"
+echo "########### Exporting AWS Creds ###########"
 export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
 export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
 aws s3 ls
 
-echo "########### unzipping file ###########"
+echo "########### Unzipping Zip File ###########"
 mv dist ${params.dist}
 unzip ${params.dist}
 sleep 5
 
-echo "########### uploading it to s3 ###########"
+echo "########### Uploading files to s3 ###########"
 if [ -d "${WORKSPACE}/dist" ]
 then
     cd ${WORKSPACE}/dist/
