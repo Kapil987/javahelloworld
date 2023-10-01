@@ -7,7 +7,7 @@ def projects = [
     // ... add more projects as needed
 ]
 
-def credentialsIds = ['pm2-stage-aws-creds', 'Cred2']
+def credentialsIds = ['awsAlgoTestCreds', 'awsAlgoTestCreds']
 
 // Variable to determine the number of days to retain builds
 def daysToKeep = 7
