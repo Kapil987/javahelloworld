@@ -32,11 +32,11 @@ fi
 echo "########### Exporting AWS Creds ###########"
 export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
 export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
-aws s3 ls
+#aws s3 ls
 
 echo "########### Unzipping Zip File ###########"
-mv dist ${params.dist}
-unzip ${params.dist}
+mv dist ${dist}
+unzip ${dist}
 sleep 5
 
 echo "########### Uploading files to s3 ###########"
