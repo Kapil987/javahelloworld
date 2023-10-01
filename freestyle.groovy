@@ -35,7 +35,7 @@ export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
 #aws s3 ls
 
 echo "########### Unzipping Zip File ###########"
-mv dist ${dist}
+mv build ${dist}
 unzip ${dist}
 sleep 5
 
