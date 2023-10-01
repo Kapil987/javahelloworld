@@ -40,7 +40,7 @@ unzip ${dist}
 sleep 5
 
 echo "########### Uploading files to s3 ###########"
-if [ -d "${WORKSPACE}/dist" ]
+if [ -d "${WORKSPACE}/build" ]
 then
     cd ${WORKSPACE}/dist/
     aws s3 cp . s3://${BUCKET_NAME}
